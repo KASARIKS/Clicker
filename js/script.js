@@ -1,3 +1,4 @@
+// html elemetns
 let beans = document.querySelector('.beans-span');
 let farm_btn = document.querySelector('.farm-button');
 let simple_farm_shop = document.getElementById('simple-farm-shop');
@@ -10,7 +11,8 @@ let speed_delay = 2;
 function appBeans(beans_num) {
     let beans_num_old = Number(beans.innerHTML);
     beans.innerHTML = `${beans_num_old + beans_num}`;
-
+    
+    // shop cycle, painting shop buttons
     for (let i = 0; i < simple_farm_shop.children.length; ++i) {
         if (simple_farm_shop.children[i].getAttribute('data-cost') <= Number(beans.innerHTML)) {
             simple_farm_shop.children[i].classList.remove('btn-outline-danger');
@@ -38,6 +40,7 @@ function appBeans(beans_num) {
     }
 }
 
+// when buy upgrade farm-button
 for (let i = 0; i < simple_farm_shop.children.length; ++i) {
     simple_farm_shop.children[i].addEventListener('click', () => {
         if (Number(simple_farm_shop.children[i].getAttribute('data-cost')) <= Number(beans.innerHTML)) {
@@ -47,6 +50,7 @@ for (let i = 0; i < simple_farm_shop.children.length; ++i) {
     });
 }
 
+// when buy upgrade count of auto farming
 for (let i = 0; i < auto_farm_shop.children.length; ++i) {
     auto_farm_shop.children[i].addEventListener('click', () => {
         if (Number(auto_farm_shop.children[i].getAttribute('data-cost')) <= Number(beans.innerHTML)) {
@@ -56,6 +60,7 @@ for (let i = 0; i < auto_farm_shop.children.length; ++i) {
     });
 }
 
+// when buy upgrade speed of auto farming
 for (let i = 0; i < auto_speed_shop.children.length; ++i) {
     auto_speed_shop.children[i].addEventListener('click', () => {
         if (Number(auto_speed_shop.children[i].getAttribute('data-cost')) <= Number(beans.innerHTML)) {
@@ -66,6 +71,7 @@ for (let i = 0; i < auto_speed_shop.children.length; ++i) {
     });
 }
 
+// auto-farm function, it`s recursive function, pushing itself to stack of calling
 function autoFarm() {
     const p = new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -75,6 +81,7 @@ function autoFarm() {
         }, speed_delay * 1000);
     });
 }
+
 
 farm_btn.addEventListener('click', () => {appBeans(simple_app)});
 autoFarm();
